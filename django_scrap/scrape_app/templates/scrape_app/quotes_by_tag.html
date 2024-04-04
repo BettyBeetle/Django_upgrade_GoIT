@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quotes by Tag</title>
+</head>
+<body>
+    <h1>Quotes with Tag: {{ tag.name }}</h1>
+    <ul>
+        {% for quote in quotes %}
+            <li>{{ quote.quote }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

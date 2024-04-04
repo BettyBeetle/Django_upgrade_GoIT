@@ -1,0 +1,46 @@
+<!DOCTYPEhtml>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Quote info</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"/>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+</head>
+<h2>Quote of <i>{{ quote.author }} </i></h2>
+
+<body>
+
+<main class="container">
+<ul>
+    <li>ID: {{ quote.id }}</li>
+    <li>Author: {{ quote.author }}</li>
+        <ul>
+            {% for tag in quote.tags.all %}
+                <li>{{ tag.name }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li>Quote: {{ quote.quote }}</li>
+
+
+</ul>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="button" onclick="window.location.href='{% url 'scrape_app:add_quote' %}'">Add next quote</button>
+    <button type="button" onclick="window.location.href='{% url 'scrape_app:quotes_list_db' %}'">Show all quotes</button>
+</form>
+
+ <nav style="margin-bottom: 20px; border-top: 2px solid; padding-left: 30px">
+        <ul>
+            <li><a href="/" role="link"> Go back to the main page </a></li>
+        </ul>
+ </nav>
+
+
+
+</main>
+</body>
+</html>

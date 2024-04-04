@@ -1,0 +1,42 @@
+<!DOCTYPEhtml>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Author info</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"/>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+</head>
+<h2>Details of <i>{{ author.fullname }} </i></h2>
+
+<body>
+
+<main class="container">
+
+<ul>
+    <li>ID: {{ author.id }}</li>
+    <li>Fullname: {{ author.fullname }}</li>
+    <li>Born_date: {{ author.born_date }}</li>
+    <li>Born location: {{ author.born_location }}</li>
+    <li>Description: {{ author.description }}</li>
+
+</ul>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="button" onclick="window.location.href='{% url 'scrape_app:add_author' %}'">Add next author</button>
+    <button type="button" onclick="window.location.href='{% url 'scrape_app:authors_list_db' %}'">Show all authors</button>
+</form>
+
+    <nav style="margin-bottom: 20px; border-top: 2px solid; padding-left: 30px">
+        <ul>
+            <li><a href="/" role="link"> Go back to the main page </a></li>
+        </ul>
+ </nav>
+
+
+
+</main>
+</body>
+</html>

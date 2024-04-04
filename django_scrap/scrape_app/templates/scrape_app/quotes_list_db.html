@@ -1,0 +1,55 @@
+<!DOCTYPEhtml>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Quotes</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"/>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+</head>
+
+
+<body>
+
+
+<main class="container">
+<h1><i>List of all quotes:</i></h1>
+
+
+
+
+<ul>
+    {% for quote in page_obj %}
+         <li>{{ quote }}</li>
+    {% endfor %}
+</ul>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</main>
+
+
+
+    <nav style="margin-top: 20px; border-top: 2px solid; width: 50%; padding-left: 30px">
+            <ul>
+                <li><a href="/" role="link"> Go back to the main page </a></li>
+            </ul>
+    </nav>
+
+</body>
+</html>

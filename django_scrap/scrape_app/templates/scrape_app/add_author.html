@@ -1,0 +1,45 @@
+<!DOCTYPEhtml>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Adding an author</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"/>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+    <style>
+        .messages {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+
+
+<main class="container">
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+    <h2><i>Add new author</i></h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add author</button>
+    </form>
+    <nav style="margin-bottom: 20px; border-top: 2px solid; padding-left: 30px">
+        <ul>
+            <li><a href="/" role="link"> Go back to the main page </a></li>
+        </ul>
+    </nav>
+
+
+</main>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tag List</title>
+</head>
+<body>
+    <h1>Tag List</h1>
+    <ul>
+        {% for tag in tags %}
+           <li><a href="{% url 'scrape_app:quotes_by_tag' tag=tag.name %}">{{ tag.name }}</a></li>
+
+        {% endfor %}
+    </ul>
+</body>
+</html>

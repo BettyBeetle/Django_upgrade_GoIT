@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scraper</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .top-right-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .main-content {
+            margin-top: 100px;
+        }
+        .main-content button {
+            margin: 10px;
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-green {
+            background-color: green;
+        }
+        .search-button {
+            padding: 12px 60px; /* Poprawka dla dłuższego przycisku */
+        }
+        input[type="text"] {
+            padding: 12px 100px; /* Powiększenie pola wprowadzania tekstu */
+            font-size: 16px; /* Dostosowanie rozmiaru czcionki */
+            border-radius: 5px; /* Dodanie zaokrąglonych krawędzi */
+            border: 1px solid #ccc; /* Dodanie obramowania */
+            box-sizing: border-box; /* Zapewnienie, że szerokość obejmuje obramowanie */
+        }
+        /* Stylowanie dla przycisków 'See all quotes from www' i 'See all authors & info from www' */
+        .specific-buttons button {
+            background-color: green;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="top-right-buttons">
+           {% if user.is_authenticated %}
+            <a href="{% url 'users:logout' %}" role="button">Logout</a>
+        {% else %}
+            <a href="{% url 'users:login' %}" role="button">Login</a>
+            <a href="{% url 'users:signup' %}" role="button">Sign Up</a>
+
+
+        {% endif %}
+        </div>
+        <main class="container">
+            <div align="center">
+                <h1>Welcome to my web-scraping page</h1>
+                <h3>http://quotes.toscrape.com</h3>
+            </div>
+            <div class="top-right" style="text-align: right;">
+                {% if user.is_authenticated %}
+                    <span style="font-size: 40px;"><i>Welcome <b>{{ user.username }}!</b></i>
+                {% endif %}
+            </div>
+            <div class="main-content">
+                <div>
+                    <button><a href="{% url 'scrape_app:quotes_www' %}" class="btn btn-lg" role="button" style="background-color: green; color: white;">Scrape </a></button>
+                    <button><a href="{% url 'scrape_app:about_authors' %}" class="btn btn-lg" role="button" style="background-color: green; color: white;">List of authors</a></button>
+                </div>
+
+                <div style="margin-top: 40px;">
+                        <a href="{% url 'scrape_app:quotes_list_db' %}" role="button">See all quotes from DB</a>
+                        <a href="{% url 'scrape_app:authors_list_db' %}" role="button">See all authors from DB</a>
+                </div>
+                <div class="btn-container spacer"; style="margin-top: 40px;">
+                  <form method="get" action="{% if tag %}{% url 'scrape_app:quotes_by_tag' tag=tag.name %}{% else %}{% url 'scrape_app:tag_list' %}{% endif %}">
+                    <input type="text" name="tag" placeholder="Enter tag" required>
+                    <button type="submit" class="btn-green btn-large">Search</button>
+                </form>
+                </div>
+                <div style="margin-top: 40px;">
+                    <a href="{% url 'scrape_app:add_author' %}" role="button">Add author</a>
+                    <a href="{% url 'scrape_app:add_quote' %}" role="button">Add quote</a>
+                </div>
+
+            </div>
+        </main>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPEhtml>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Adding a quote</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"/>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+    <style>
+        .messages {
+            background-color: #e6ffe6;
+            border: 1px solid #66cc66;
+            color: #006600;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<main class="container">
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+    <h2><i>Add new quote</i></h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add quote</button>
+    </form>
+    <nav style="margin-bottom: 20px; border-top: 2px solid; padding-left: 30px">
+        <ul>
+            <li><a href="/" role="link"> Go back to the main page </a></li>
+        </ul>
+    </nav>
+
+
+
+
+
+</main>
+</body>
+</html>

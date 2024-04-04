@@ -41,7 +41,7 @@
 
 
 
-> [!!! WARNING]
+> [!WARNING]
 > 
 > Wprowadź 0 lub 1  (0=False, 1=True) dla:
 > 
